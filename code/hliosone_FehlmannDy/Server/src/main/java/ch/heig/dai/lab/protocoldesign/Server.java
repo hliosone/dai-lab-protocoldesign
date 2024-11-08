@@ -1,5 +1,9 @@
 package ch.heig.dai.lab.protocoldesign;
 
+import java.io.*;
+import java.net.*;
+import java.util.List;
+
 public class Server {
     final int SERVER_PORT = 1234;
     private final List<String> supportedOperations = List.of("ADD", "SUB", "MUL", "DIV", "QUIT");
@@ -31,7 +35,7 @@ public class Server {
                         if (command.equals("QUIT")) {
                             System.out.println("Client disconnected.");
                             socket.close();
-                            break;
+                            return;
                         }
                         String response = processCommand(command);
                         out.write(response + "\n");
